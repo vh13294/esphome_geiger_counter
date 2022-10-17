@@ -78,11 +78,11 @@ binary_sensor:
 font:
   # gfonts://family[@weight]
   - file: "gfonts://Roboto"
-    id: roboto40
-    size: 40
+    id: roboto25
+    size: 25
   - file: "gfonts://Roboto"
-    id: roboto60
-    size: 60
+    id: roboto50
+    size: 40
 
 spi:
   clk_pin: 18
@@ -100,14 +100,14 @@ display:
     pages:
       - id: page1
         lambda: |-
-          it.print(10, 10, id(roboto60), "Hello World!");
-          it.print(10, 75, id(roboto40), "Hello World!");
-          it.print(10, 155, id(roboto40), "Hello World!");
-          it.graph(115, 75, id(mkSv_Hour_graph));
+          it.print(10, 10, id(roboto50), "Hello World!");
+          it.print(100, 120, id(roboto25), TextAlign::BASELINE_RIGHT, "mkSv/H");
+          it.print(100, 200, id(roboto25), TextAlign::BASELINE_RIGHT, "mkSv");
+          it.graph(115, 70, id(mkSv_Hour_graph), my_light_blue);
           it.graph(115, 155, id(mkSv_graph), my_yellow);
       - id: page2
         lambda: |-
-          it.print(20, 100, id(roboto40), "Hello World!");
+          it.print(20, 100, id(roboto25), "Hello World!");
 
 color:
   - id: my_light_red
