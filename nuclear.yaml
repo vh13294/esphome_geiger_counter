@@ -100,7 +100,9 @@ display:
     pages:
       - id: page1
         lambda: |-
-          it.print(10, 10, id(roboto50), "Hello World!");
+          id(my_animation).next_frame();
+          it.image(20, 10, id(my_animation));
+          it.print(100, 10, id(roboto50), my_yellow, "Radiation");
           it.print(100, 120, id(roboto25), TextAlign::BASELINE_RIGHT, "mkSv/H");
           it.print(100, 200, id(roboto25), TextAlign::BASELINE_RIGHT, "mkSv");
           it.graph(115, 70, id(mkSv_Hour_graph), my_light_blue);
@@ -108,6 +110,12 @@ display:
       - id: page2
         lambda: |-
           it.print(20, 100, id(roboto25), "Hello World!");
+
+animation:
+  - file: "radio.gif"
+    id: my_animation
+    resize: 50x50
+    type: RGB24
 
 color:
   - id: my_light_red
