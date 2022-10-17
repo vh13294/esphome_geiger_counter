@@ -29,13 +29,34 @@ wifi:
 captive_portal:
 
 sensor:
-  - platform: wifi_signal
-    name: "WiFi Signal Sensor"
-    id: wifi_sensor
+  - platform: pulse_counter
+    pin: 19
+    unit_of_measurement: "mkSv/Hour"
+    name: "Ionizing Radiation Power"
+    count_mode:
+      rising_edge: DISABLE
+      falling_edge: INCREMENT
+    update_interval: 60s
+    accuracy_decimals: 3
+    id: my_dose_meter
+    filters:
+      - sliding_window_moving_average: # 5-minutes moving average (MA5) here
+          window_size: 5
+          send_every: 5
+      - multiply: 0.0057 # SBM20 tube conversion factor of pulses into mkSv/Hour
 
-  - platform: uptime
-    name: Uptime Sensor
-    id: uptime_sensor
+  - platform: integration
+    name: "Total Ionizing Radiation Dose"
+    unit_of_measurement: "mkSv"
+    sensor: my_dose_meter # link entity id to the pulse_counter values above
+    id: my_dose_meter_mkSv
+    icon: "mdi:radioactive"
+    accuracy_decimals: 5
+    time_unit: min # integrate values every next minute
+    filters:
+      # obtained dose. Converting from mkSv/hour into mkSv/minute: [mkSv/h / 60] OR [mkSv/h * 0.0166666667].
+      # if my_dose_meter in CPM, then [0.0054 / 60 minutes] = 0.00009; so CPM * 0.00009 = dose every next minute, mkSv.
+      - multiply: 0.0166666667
 
 binary_sensor:
   - platform: gpio
@@ -77,11 +98,11 @@ display:
       - id: page1
         lambda: |-
           // Draw the graph at position [x=10,y=20]
-          it.graph(10, 20, id(single_temperature_graph));
+          it.graph(35, 20, id(mkSv_Hour_graph));
+          it.graph(35, 140, id(mkSv_graph), my_yellow);
       - id: page2
         lambda: |-
-          // Draw the graph at position [x=10,y=20]
-          it.graph(10, 20, id(multi_temperature_graph), my_yellow);
+          it.print(20, 100, id(roboto), "Hello World!");
 
 color:
   - id: my_light_red
@@ -103,29 +124,13 @@ color:
 
 graph:
   # Show bare-minimum auto-ranged graph
-  - id: single_temperature_graph
-    sensor: wifi_sensor
+  - id: mkSv_Hour_graph
+    sensor: my_dose_meter
     duration: 1h
-    width: 300
-    height: 200
-  - id: multi_temperature_graph
-    sensor: uptime_sensor
+    width: 200
+    height: 100
+  - id: mkSv_graph
+    sensor: my_dose_meter_mkSv
     duration: 1h
-    width: 300
-    height: 200
-  # Show multi-trace graph
-  # - id: multi_temperature_graph
-  #   duration: 1h
-  #   width: 300
-  #   height: 200
-  #   max_value: -100.
-  #   min_value: 1000.
-  #   traces:
-  #     - sensor: uptime_sensor
-  #       line_type: DASHED
-  #       line_thickness: 2
-  #       color: my_light_red
-  #     - sensor: wifi_sensor
-  #       line_type: SOLID
-  #       line_thickness: 3
-  #       color: my_light_blue
+    width: 200
+    height: 100
