@@ -78,8 +78,11 @@ binary_sensor:
 font:
   # gfonts://family[@weight]
   - file: "gfonts://Roboto"
-    id: roboto
-    size: 20
+    id: roboto40
+    size: 40
+  - file: "gfonts://Roboto"
+    id: roboto60
+    size: 60
 
 spi:
   clk_pin: 18
@@ -97,12 +100,14 @@ display:
     pages:
       - id: page1
         lambda: |-
-          // Draw the graph at position [x=10,y=20]
-          it.graph(35, 20, id(mkSv_Hour_graph));
-          it.graph(35, 140, id(mkSv_graph), my_yellow);
+          it.print(10, 10, id(roboto60), "Hello World!");
+          it.print(10, 75, id(roboto40), "Hello World!");
+          it.print(10, 155, id(roboto40), "Hello World!");
+          it.graph(115, 75, id(mkSv_Hour_graph));
+          it.graph(115, 155, id(mkSv_graph), my_yellow);
       - id: page2
         lambda: |-
-          it.print(20, 100, id(roboto), "Hello World!");
+          it.print(20, 100, id(roboto40), "Hello World!");
 
 color:
   - id: my_light_red
@@ -128,9 +133,9 @@ graph:
     sensor: my_dose_meter
     duration: 1h
     width: 200
-    height: 100
+    height: 80
   - id: mkSv_graph
     sensor: my_dose_meter_mkSv
     duration: 1h
     width: 200
-    height: 100
+    height: 80
