@@ -12,3 +12,5 @@
 
 - GM Tube Info (M4011 - Glass tube)
   https://sites.google.com/site/diygeigercounter/technical/gm-tubes-supported
+
+- Don't operate it without a cover. There's roughly 400 V across that M4011 tube, which might put a dent in the day for you.
