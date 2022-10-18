@@ -9,3 +9,6 @@
 
 - ESPHome ILI9341 TFT LCD
   https://esphome.io/components/display/ili9341.html
+
+- GM Tube Info (M4011 - Glass tube)
+  https://sites.google.com/site/diygeigercounter/technical/gm-tubes-supported
