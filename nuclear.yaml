@@ -53,7 +53,8 @@ sensor:
     accuracy_decimals: 5
     time_unit: min # integrate values every next minute
     filters:
-      - multiply: 0.0057
+      - multiply: 0.0065
+      # https://github.com/cdjq/DFRobot_Geiger
 
 binary_sensor:
   - platform: gpio
@@ -102,12 +103,12 @@ display:
       - id: page1
         lambda: |-
           id(my_animation).next_frame();
-          it.image(20, 10, id(my_animation));
-          it.print(100, 10, id(roboto40), my_yellow, "Radiation");
+          it.image(45, 10, id(my_animation));
+          it.print(115, 10, id(roboto40), my_yellow, "Radiation");
           it.printf(5, 80, id(roboto36), "%.3f", id(counter_uSv_h).state);
           it.print(100, 140, id(roboto22), TextAlign::BASELINE_RIGHT, "μSv/h");
-          it.printf(5, 160, id(roboto36), "%.0f", id(counter_cpm).state);
-          it.print(100, 220, id(roboto22), TextAlign::BASELINE_RIGHT, "CPM");
+          it.printf(15, 160, id(roboto36), "%03.0f", id(counter_cpm).state);
+          it.print(90, 220, id(roboto22), TextAlign::BASELINE_RIGHT, "CPM");
           it.graph(115, 70, id(uSv_Hour_graph), my_light_blue);
           it.graph(115, 155, id(cpm_graph), my_yellow);
       - id: page2
@@ -121,12 +122,6 @@ animation:
     type: RGB24
 
 color:
-  - id: my_light_red
-    red: 100%
-    green: 20%
-    blue: 25%
-    white: 0%
-
   - id: my_light_blue
     red: 25%
     green: 20%
