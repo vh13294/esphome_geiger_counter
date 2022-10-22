@@ -24,3 +24,8 @@ https://www.aliexpress.com/item/1005004157549971.html
 2. LILYGO® TTGO 2.4 LCD ESP32 Dev Board
 
 https://www.aliexpress.com/item/32854502767.htmlHere
+
+
+![Alt text](2022-10-22 20.58.17.jpg?raw=true "Preview Image")
+
+![Alt text](2022-10-22 20.58.23.mp4?raw=true "Preview Video")
