@@ -33,28 +33,23 @@ sensor:
     pin: 19
     unit_of_measurement: "CPM"
     name: "Ionizing Radiation Counts Per Minute"
-    count_mode:
-      rising_edge: DISABLE
-      falling_edge: INCREMENT
-    update_interval: 60s
-    accuracy_decimals: 3
     id: counter_cpm
     filters:
       - sliding_window_moving_average: # 5-minutes moving average (MA5) here
           window_size: 5
           send_every: 5
-
-  - platform: integration
-    name: "Ionizing Radiation Power"
-    unit_of_measurement: "μSv/h"
-    sensor: counter_cpm # link entity id to the pulse_counter values above
-    id: counter_uSv_h
-    icon: "mdi:radioactive"
-    accuracy_decimals: 5
-    time_unit: min # integrate values every next minute
-    filters:
-      - multiply: 0.0065
+    on_raw_value:
+      - sensor.template.publish:
+          id: counter_uSv_h
+          state: !lambda "return x / 153.8;"
       # https://github.com/cdjq/DFRobot_Geiger
+
+  - platform: template
+    name: "Ionizing Radiation Power"
+    id: "counter_uSv_h"
+    unit_of_measurement: "µSv/h"
+    icon: mdi:radioactive
+    accuracy_decimals: 5
 
 binary_sensor:
   - platform: gpio
