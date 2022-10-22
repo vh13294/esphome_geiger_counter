@@ -14,3 +14,13 @@
   https://sites.google.com/site/diygeigercounter/technical/gm-tubes-supported
 
 - Don't operate it without a cover. There's roughly 400 V across that M4011 tube, which might shock you.
+
+Here are the links where I bought my parts
+
+1. DFRobot Geiger Counter
+
+https://www.aliexpress.com/item/1005004157549971.html
+
+2. LILYGO® TTGO 2.4 LCD ESP32 Dev Board
+
+https://www.aliexpress.com/item/32854502767.htmlHere
