@@ -25,7 +25,6 @@ https://www.aliexpress.com/item/1005004157549971.html
 
 https://www.aliexpress.com/item/32854502767.htmlHere
 
+![Screenshot](demo.jpg)
 
-![Screenshot](2022-10-22 20.58.17.jpg)
-
-![Screenshot](2022-10-22 20.58.23.mp4)
+![Video](demo.mp4)
