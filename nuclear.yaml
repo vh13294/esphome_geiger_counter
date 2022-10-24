@@ -34,11 +34,7 @@ sensor:
     unit_of_measurement: "CPM"
     name: "Ionizing Radiation Counts Per Minute"
     id: counter_cpm
-    filters:
-      - sliding_window_moving_average: # 5-minutes moving average (MA5) here
-          window_size: 5
-          send_every: 5
-    on_raw_value:
+    on_value:
       - sensor.template.publish:
           id: counter_uSv_h
           state: !lambda "return x / 153.8;"
